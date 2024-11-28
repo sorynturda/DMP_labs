@@ -57,20 +57,20 @@ int get_y(int n) {
 void verificare_matrice() {
   int casigator_temp = -1;
   for (int i = 0; i < 3; i++) {
-    if (mat[i][1] == mat[i][0] && mat[i][2] == mat[i][0] && mat[0][2] != '_') {
+    if (mat[i][1] == mat[i][0] && mat[i][2] == mat[i][0] && mat[i][2] != '_') {
       if (mat[i][0] == 'X')
         casigator_temp = 1;
       else if (mat[i][0] == '0')
         casigator_temp = 0;
     }
-    if (mat[1][i] == mat[0][i] && mat[2][i] == mat[0][i] && mat[0][2] != '_') {
+    if (mat[1][i] == mat[0][i] && mat[2][i] == mat[0][i] && mat[2][i] != '_') {
       if (mat[0][i] == 'X')
         casigator_temp = 1;
       else if (mat[0][i] == '0')
         casigator_temp = 0;
     }
   }
-  if (mat[1][1] == mat[0][0] && mat[1][1] == mat[2][2] && mat[0][2] != '_') {  //diagonala principala
+  if (mat[1][1] == mat[0][0] && mat[1][1] == mat[2][2] && mat[1][1] != '_') {  //diagonala principala
     if (mat[1][1] == 'X')
       casigator_temp = 1;
     else if (mat[0][0] == '0')
