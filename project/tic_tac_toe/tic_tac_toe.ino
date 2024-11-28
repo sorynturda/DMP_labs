@@ -7,6 +7,9 @@ char mat[3][3] = { { "___" }, { "___" }, { "___" } };
 void setup() {
   Serial.begin(9600);
   initializare_butoane();
+  Serial.println("-------");
+  afisare_mat();
+  Serial.println("-------");
 }
 
 void loop() {
@@ -22,8 +25,8 @@ void loop() {
         else
           mat[get_x(i)][get_y(i)] = '0', x = 1;
 
-        print_mat();
-        Serial.println("--------");
+        afisare_mat();
+        Serial.println("-------");
         verificare_matrice();
         cnt++;
         if (cnt == N) joc_terminat = 1;
@@ -90,10 +93,13 @@ void verificare_matrice() {
 }
 
 
-void print_mat() {
+void afisare_mat() {
   for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++)
+    Serial.print("|");
+    for (int j = 0; j < 3; j++){
       Serial.print(mat[i][j]);
+      Serial.print("|");
+    }
     Serial.println();
   }
 }
