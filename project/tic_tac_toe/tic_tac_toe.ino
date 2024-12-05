@@ -10,41 +10,49 @@ char mat[3][3] = { { "___" }, { "___" }, { "___" } };
 
 void setup() {
   Serial.begin(9600);
+  Serial.setTimeout(1);
   initializare_butoane();
-  Serial.println("-------");
-  afisare_mat();
-  Serial.println("-------");
+  // Serial.println("-------");
+  // afisare_mat();
+  // Serial.println("-------");
 }
 
 void loop() {
-  if (joc_terminat == 0){
+  if (joc_terminat == 0) {
     for (int i = 0; i < N; i++) {
       bs[i] = digitalRead(pini_butoane[i]);
       if (bs[i] == LOW && flags[i] == 0) {
         flags[i] = 1;
         // Serial.print("Buton: ");
         // Serial.println(i + 1);
-        if (x == 1)
-          mat[get_x(i)][get_y(i)] = 'X', x = 0;
-        else
-          mat[get_x(i)][get_y(i)] = '0', x = 1;
-
-        afisare_mat();
-        Serial.println("-------");
+        int linie = get_x(i), coloana = get_y(i);
+        if (x == 1) {
+          Serial.print("X");
+          mat[linie][coloana] = 'X', x = 0;
+        } else {
+          Serial.print("0");
+          mat[linie][coloana] = '0', x = 1;
+        }
+        Serial.print(" ");
+        Serial.print(linie + 1);
+        Serial.print(" ");
+        Serial.print(coloana + 1);
+        Serial.println();
+        // afisare_mat();
+        // Serial.println("-------");
         verificare_matrice();
         cnt++;
         if (cnt == N) joc_terminat = 1;
       }
     }
-  }
-  else {
+  } else {
     if (cine_castiga == 1)
-      Serial.println("X castiga");
+      Serial.println("X");
     else if (cine_castiga == 0)
-      Serial.println("0 castiga");
+      Serial.println("0");
     else
-      Serial.println("Egalitate");
-    delay(3000);
+      Serial.println("E");
+    delay(999999999);
   }
 }
 
@@ -84,7 +92,7 @@ void verificare_matrice() {
       casigator_temp = 0;
   }
 
-  if (mat[0][2] == mat[1][1] && mat[1][1] == mat[2][0] && mat[0][2] != '_') { // diagonala secundara
+  if (mat[0][2] == mat[1][1] && mat[1][1] == mat[2][0] && mat[0][2] != '_') {  // diagonala secundara
     if (mat[1][1] == 'X')
       casigator_temp = 1;
     else if (mat[0][0] == '0')
@@ -99,10 +107,10 @@ void verificare_matrice() {
 
 void afisare_mat() {
   for (int i = 0; i < 3; i++) {
-    Serial.print("|");
-    for (int j = 0; j < 3; j++){
+    // Serial.print("|");
+    for (int j = 0; j < 3; j++) {
       Serial.print(mat[i][j]);
-      Serial.print("|");
+      // Serial.print("|");
     }
     Serial.println();
   }
