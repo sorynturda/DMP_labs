@@ -1,8 +1,56 @@
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
+
 const int N = 9;
-int flags[N], bs[N], pini_butoane[] = { A0, A1, A2, A3, A4, A5, A6, A7, A8 };
+int flags[N], bs[N], pini_butoane[] = { A0, A1, A2, A3, A4, A5, A7, A8, A9 };
 
 int cnt = 0, x = 1, joc_terminat = 0, cine_castiga = -1;  //castigator x = 1 / 0 = 0 / -1 = egal
 char mat[3][3] = { { "___" }, { "___" }, { "___" } };
+
+byte x_mij1[8] = {
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B11111,
+  B00000,
+  B01010,
+  B00100,
+};
+
+byte x_mij2[8] = {
+  B00100,
+  B01010,
+  B00000,
+  B11111,
+  B00000,
+  B00000,
+  B00000,
+};
+
+byte z_mij1[8] = {
+  B00000,
+  B00000,
+  B00000,
+  B00000,
+  B11111,
+  B00000,
+  B01110,
+  B01010,
+};
+
+byte z_mij2[8] = {
+  B01010,
+  B01110,
+  B00000,
+  B11111,
+  B00000,
+  B00000,
+  B00000,
+};
+
+
 
 void setup() {
   Serial.begin(9600);
@@ -10,6 +58,7 @@ void setup() {
   Serial.println("-------");
   afisare_mat();
   Serial.println("-------");
+  initializare_lcd();
 }
 
 void loop() {
@@ -101,5 +150,17 @@ void afisare_mat() {
       Serial.print("|");
     }
     Serial.println();
+  }
+}
+
+void initializare_lcd(){
+  lcd.begin(16, 2);
+  lcd.createChar(0, z_mij1);
+  lcd.createChar(1, z_mij2);
+  for (int i=0;i<3;i++){
+    lcd.setCursor(i, 0);
+    lcd.write(byte(0));
+    lcd.setCursor(i, 1);
+    lcd.write(1);
   }
 }
