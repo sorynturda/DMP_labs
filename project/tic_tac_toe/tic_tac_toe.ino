@@ -3,7 +3,7 @@
 LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
 
 const int N = 9;
-int flags[N], bs[N], pini_butoane[] = { A0, A1, A2, A3, A4, A5, A7, A8, A9 };
+int flags[N], bs[N], pini_butoane[] = { A0, A1, A2, A3, A4, A5, A6, A7, A8 };
 
 int cnt = 0, x = 1, joc_terminat = 0, cine_castiga = -1;  //castigator x = 1 / 0 = 0 / -1 = egal
 char mat[3][3] = { { "___" }, { "___" }, { "___" } };
@@ -34,9 +34,9 @@ void loop() {
           mat[linie][coloana] = '0', x = 1;
         }
         Serial.print(" ");
-        Serial.print(linie + 1);
+        Serial.print(linie);
         Serial.print(" ");
-        Serial.print(coloana + 1);
+        Serial.print(coloana);
         Serial.println();
         // afisare_mat();
         // Serial.println("-------");
