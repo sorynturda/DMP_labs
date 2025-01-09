@@ -3,7 +3,7 @@
 LiquidCrystal lcd(7, 6, 5, 4, 3, 2);
 
 const int N = 9;
-int flags[N], bs[N], pini_butoane[] = { A0, A1, A2, A3, A4, A5, A6, A7, A8 };
+int flags[N], bs[N], pini_butoane[] = { A0, A1, A2, A3, A4, A5, A7, A8, A9 };
 
 int cnt = 0, x = 1, joc_terminat = 0, cine_castiga = -1;  //castigator x = 1 / 0 = 0 / -1 = egal
 char mat[3][3] = { { "___" }, { "___" }, { "___" } };
@@ -12,6 +12,7 @@ void setup() {
   Serial.begin(9600);
   Serial.setTimeout(1);
   initializare_butoane();
+
   // Serial.println("-------");
   // afisare_mat();
   // Serial.println("-------");
@@ -88,14 +89,14 @@ void verificare_matrice() {
   if (mat[1][1] == mat[0][0] && mat[1][1] == mat[2][2] && mat[1][1] != '_') {  //diagonala principala
     if (mat[1][1] == 'X')
       casigator_temp = 1;
-    else if (mat[0][0] == '0')
+    else if (mat[1][1] == '0')
       casigator_temp = 0;
   }
 
   if (mat[0][2] == mat[1][1] && mat[1][1] == mat[2][0] && mat[0][2] != '_') {  // diagonala secundara
     if (mat[1][1] == 'X')
       casigator_temp = 1;
-    else if (mat[0][0] == '0')
+    else if (mat[1][1] == '0')
       casigator_temp = 0;
   }
   if (casigator_temp != -1) {

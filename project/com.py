@@ -10,9 +10,9 @@ class ArduinoGUI:
         self.buttons = []
         self.data_queue = queue.Queue()
         self.running = True
-        self.moves_count = 0  # Track number of moves for draw detection
+        self.moves_count = 0 
         
-        # Create GUI
+        
         self.root.resizable(False, False)
         self.root.title("Tic Tac Toe")
         
@@ -24,11 +24,9 @@ class ArduinoGUI:
         self.root.bind("<Escape>", self.on_escape)
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
         
-        # Start serial thread
         self.serial_thread = Thread(target=self.read_serial, daemon=True)
         self.serial_thread.start()
         
-        # Start checking for serial data
         self.check_queue()
     
     def show_winner(self, winner):
